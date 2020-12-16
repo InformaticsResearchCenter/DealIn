@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', views.index, name='user'),
-    path('<int:id>/', views.show, name='show'),
+    path('signup', views.signup, name='signup'),
+    path('show/<slug:id>/', views.show, name='show'),
     path('login/', views.auth, name='login'),
 ]

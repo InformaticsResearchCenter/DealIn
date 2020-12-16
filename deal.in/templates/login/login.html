@@ -4,28 +4,32 @@
 {% block content %}
 <section class="content">
   <div class="container-fluid">
-    <div class="row" >
+    <div class="row">
       <div class="col-md-6" style="margin-top: 60px;">
-        <div class="card card-info" >
+        <div class="card card-info">
           <div class="card-header">
             <div class="center">
               <img src="{% static 'images/logo.png' %}" class="center" style="width: 100px;">
             </div>
           </div>
-          <!-- /.card-header -->
-          <!-- form start -->
-          <form role="form">
+          {% for message in messages %}
+            <div class="alert alert-danger">
+              <a class="close" href="#" data-dismiss="alert">×</a>
+              {{ message }}
+            </div>
+          {% endfor %}
+          <form role="form" method="POST">
+            {% csrf_token %}
             <div class="card-body">
               <div class="form-group">
-                <label for="exampleInputEmail1">Email address :</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                <label for="exampleInputEmail1">Username :</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter email">
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password :</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
               </div>
             </div>
-            <!-- /.card-body -->
             <div class="card-footer">
               <button type="submit" style="float: right;" class="btn btn-primary">Login</button>
             </div>
@@ -33,6 +37,6 @@
         </div>
       </div>
     </div>
-  </div><!-- /.container-fluid -->
+  </div>
 </section>
 {% endblock content %}

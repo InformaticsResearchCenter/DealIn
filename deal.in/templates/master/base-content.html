@@ -46,7 +46,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 
 <body>
-    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -67,9 +67,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                             </div>
                         </div>
-                        <!-- /.card-body -->
                         <div class="modal-footer">
-                            <a class="btn btn-primary" href="{% url 'login' %}">Masuk</a>
+                            <a class="btn btn-primary" href="">Masuk</a>
                         </div>
                     </form>
                 </div>
@@ -109,15 +108,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Konfirmasi Password">
                             </div>
                         </div>
-                        <!-- /.card-body -->
                         <div class="modal-footer">
-                            <a class="btn btn-primary" href="{% url 'login' %}">Daftar</a>
+                            <a class="btn btn-primary" href="">Daftar</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- header -->
     <div class="agileits_header">
         <div class="container">
@@ -126,13 +124,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="agile-login">
                 <ul>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#register">
-                        Daftar
-                    </button>
-                    <li></li>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#login">
-                        Masuk
-                    </button>
+                    {% if 'jwt' not in request.COOKIES %}
+                        <a href="{% url 'signup_user' %}" class="btn btn-primary" role="button">Daftar</a>
+                    {% endif %}
+                    <li>
+                    {% if 'jwt' not in request.COOKIES %}
+                        <a href="{% url 'login_user' %}" class="btn btn-primary" role="button">Masuk</a>
+                    {% endif %}
+                    {% if 'jwt' in request.COOKIES %}
+                        <div class="btn-group">
+                            <button class="btn btn-primary" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Halo {{user}} !
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Profil</a>
+                                <a class="dropdown-item" href="{% url 'logout_user' %}">Keluar</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                    </li>
                 </ul>
             </div>
             <div class="product_list_header">
@@ -142,7 +152,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
                 </form>
             </div>
-            <div class="clearfix"> </div>
+            <div class="clearfix"></div>
         </div>
     </div>
 
@@ -154,7 +164,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </ul>
             </div>
             <div class="w3ls_logo_products_left">
-                <img class="logo" src="{% static 'images/logo.png' %}" alt="">
+                <a href="{% url 'home' %}"><img class="logo" src="{% static 'images/logo.png' %}" alt=""></a>
             </div>
             <div class="w3l_search">
                 <form action="#" method="post">

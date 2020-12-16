@@ -38,9 +38,6 @@ DEBUG = env('DEBUG')
 ALLOWED_HOSTS = ['*']
 
 
-CSRF_COOKIE_SECURE = True
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -54,6 +51,7 @@ INSTALLED_APPS = [
     'deal_in',
     'login'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

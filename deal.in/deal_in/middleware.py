@@ -1,3 +1,4 @@
+from django.shortcuts import render, redirect
 from functools import wraps
 from deal_in.jwt import JWTAuth
 from deal_in.response import Response
@@ -10,7 +11,7 @@ def jwtRequired(fn):
         try:
             decode(args[0].headers.get('Authorization'))
         except Exception as e:
-            return HttpResponse('Unauthorized', status=401)
+            return redirect('login_user')
         return fn(*args, **kwargs)
 
     return wrapper
